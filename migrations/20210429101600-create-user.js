@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      uuid: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-      },
+      // uuid: {
+      //   type: Sequelize.UUID,
+      //   defaultValue: Sequelize.UUIDV4,
+      // },
       email: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -24,11 +24,11 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      firstName: {
+      firstname: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      lastName: {
+      lastname: {
         allowNull: false,
         type: Sequelize.STRING,
       },

@@ -8,16 +8,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Like.belongsTo(models.User, { foreignKey: "idUsers" });
-      Like.belongsTo(models.Post, { foreignKey: "idPosts" });
+      Like.belongsTo(models.User, { foreignKey: "userId" });
+      Like.belongsTo(models.Post, { foreignKey: "postId" });
     }
   }
   Like.init(
     {
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
+      // uuid: {
+      //   type: DataTypes.UUID,
+      //   defaultValue: DataTypes.UUIDV4,
+      // },
     },
     {
       sequelize,

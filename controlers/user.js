@@ -2,16 +2,17 @@ const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
 exports.signup = (req, res, next) => {
-  const { email, password, firstName, lastName, avatar, isAdmin } = req.body;
+  const { email, password, firstname, lastname, avatar, isAdmin } = req.body;
   bcrypt
     .hash(password, 10)
     .then((hash) => {
       const user = new User({
         email,
         password: hash,
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         avatar,
         isAdmin,
       });
@@ -36,8 +37,8 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ error: "Mot de passe incorrect" });
           }
           res.status(200).json({
-            userId: user.uuid,
-            token: jwt.sign({ uuid: user.uuid }, process.env.RANDOM_TOKEN, {
+            userId: user.id,
+            token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
               expiresIn: "24h",
             }),
           });

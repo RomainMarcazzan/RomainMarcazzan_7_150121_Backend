@@ -8,15 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      uuid: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-      },
-      idUsers: {
+      // uuid: {
+      //   type: Sequelize.UUID,
+      //   defaultValue: Sequelize.UUIDV4,
+      // },
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      idPosts: {
+      postId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },

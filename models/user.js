@@ -9,21 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.Post, { foreignKey: "idUsers", as: "posts" });
-      User.hasMany(models.Like, { foreignKey: "idUsers" });
-      User.hasMany(models.Comment, { foreignKey: "idUsers" });
-    }
-
-    toJSON() {
-      return { ...this.get(), id: undefined };
+      User.hasMany(models.Post, { foreignKey: "userId" });
+      User.hasMany(models.Like, { foreignKey: "userId" });
+      User.hasMany(models.Comment, { foreignKey: "userId" });
     }
   }
   User.init(
     {
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
+      // uuid: {
+      //   type: DataTypes.UUID,
+      //   defaultValue: DataTypes.UUIDV4,
+      // },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      firstName: {
+      firstname: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -49,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "User must have a firstname" },
         },
       },
-      lastName: {
+      lastname: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

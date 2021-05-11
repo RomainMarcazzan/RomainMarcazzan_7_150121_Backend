@@ -8,21 +8,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Post.belongsTo(models.User, { foreignKey: "idUsers", as: "user" });
-      Post.hasMany(models.Like, { foreignKey: "idPosts" });
-      Post.hasMany(models.Comment, { foreignKey: "idPosts" });
-    }
-
-    toJSON() {
-      return { ...this.get(), id: undefined, idUsers: undefined };
+      Post.belongsTo(models.User, { foreignKey: "userId" });
+      Post.hasMany(models.Like, { foreignKey: "postId" });
+      Post.hasMany(models.Comment, { foreignKey: "postId" });
     }
   }
   Post.init(
     {
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
+      // uuid: {
+      //   type: DataTypes.UUID,
+      //   defaultValue: DataTypes.UUIDV4,
+      // },
       imageUrl: {
         type: DataTypes.STRING,
         allowNull: true,
