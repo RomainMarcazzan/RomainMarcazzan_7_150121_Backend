@@ -10,7 +10,6 @@ exports.createPost = (req, res, next) => {
       req.file.filename
     }`,
   });
-  console.log(postObject);
   post
     .save()
     .then(res.status(201).json({ message: "post enregistré" }))
@@ -31,21 +30,21 @@ exports.getOnePost = (req, res, next) => {
         lastname: post.User.lastname,
         title: post.title,
         imageUrl: post.imageUrl,
+        userId: post.User.id,
       })
     )
     .catch((error) => res.status(400).json({ error }));
 };
 
-
 exports.deletePost = (req, res, next) => {
-  Post.findOne({where: { id: req.params.id }})
-    .then(post => {
-      const filename = post.imageUrl.split('/images/')[1];
+  Post.findOne({ where: { id: req.params.id } })
+    .then((post) => {
+      const filename = post.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
-        Post.destroy({ where: { id: req.params.id }})
-          .then(() => res.status(200).json({ message: 'post supprimé'}))
-          .catch(error => res.status(400).json({ error }));
+        Post.destroy({ where: { id: req.params.id } })
+          .then(() => res.status(200).json({ message: "post supprimé" }))
+          .catch((error) => res.status(400).json({ error }));
       });
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch((error) => res.status(500).json({ error }));
 };
