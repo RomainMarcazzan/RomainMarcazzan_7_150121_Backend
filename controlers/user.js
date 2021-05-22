@@ -18,7 +18,14 @@ exports.signup = (req, res, next) => {
       });
       user
         .save()
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+        .then(() =>
+          res.status(201).json({
+            user,
+            token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
+              expiresIn: "24h",
+            }),
+          })
+        )
         .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
@@ -37,7 +44,7 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ error: "Mot de passe incorrect" });
           }
           res.status(200).json({
-            userId: user.id,
+            user,
             token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
               expiresIn: "24h",
             }),
