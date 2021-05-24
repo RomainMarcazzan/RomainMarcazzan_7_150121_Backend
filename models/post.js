@@ -9,8 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Post.belongsTo(models.User, { foreignKey: "userId" });
-      Post.hasMany(models.Like, { foreignKey: "postId" });
-      Post.hasMany(models.Comment, { foreignKey: "postId" });
+      Post.hasMany(
+        models.Like,
+        { foreignKey: "postId" },
+        { onDelete: "CASCADE" }
+      );
+      Post.hasMany(
+        models.Comment,
+        { foreignKey: "postId" },
+        { onDelete: "CASCADE" }
+      );
     }
   }
   Post.init(
