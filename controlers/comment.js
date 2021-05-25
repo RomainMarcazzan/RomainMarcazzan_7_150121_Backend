@@ -10,7 +10,7 @@ exports.createComment = (req, res, next) => {
 };
 
 exports.getComments = (req, res, next) => {
-  Comment.findAll({ where: { postId: req.params.postId }, include: "User" })
+  Comment.findAll({ where: { postId: req.params.id }, include: "User" })
     .then((comments) => res.status(200).json(comments))
     .catch((error) => res.status(400).json({ error }));
 };
