@@ -17,7 +17,7 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll({ include: "User" })
+  Post.findAll({ include: "User", order: [["createdAt", "DESC"]] })
     .then((posts) => res.status(200).json({ posts }))
     .catch((error) => res.status(400).json({ error }));
 };

@@ -2,3 +2,5 @@ node_modules
 .env
 config.json
 test.txt
+avatars
+images
