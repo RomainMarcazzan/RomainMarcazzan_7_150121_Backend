@@ -14,16 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Comment.init(
     {
-      // uuid: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      // },
       comment: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      isFlaged: {
-        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
     },

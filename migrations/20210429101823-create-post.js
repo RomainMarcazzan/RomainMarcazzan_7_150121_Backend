@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      // uuid: {
-      //   type: Sequelize.UUID,
-      //   defaultValue: Sequelize.UUIDV4,
-      // },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -29,10 +25,6 @@ module.exports = {
       title: {
         allowNull: true,
         type: Sequelize.STRING,
-      },
-      isFlaged: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

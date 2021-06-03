@@ -19,24 +19,21 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: "postId" },
         { onDelete: "CASCADE" }
       );
+      Post.hasMany(
+        models.Report,
+        { foreignKey: "postId" },
+        { onDelete: "CASCADE" }
+      );
     }
   }
   Post.init(
     {
-      // uuid: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      // },
       imageUrl: {
         type: DataTypes.STRING,
         allowNull: true,
       },
       title: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      isFlaged: {
-        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
     },

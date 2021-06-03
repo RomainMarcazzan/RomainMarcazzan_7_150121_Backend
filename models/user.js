@@ -1,6 +1,5 @@
 "use strict";
 const { Model } = require("sequelize");
-const comment = require("./comment");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -24,14 +23,15 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: "userId" },
         { onDelete: "CASCADE" }
       );
+      User.hasMany(
+        models.Report,
+        { foreignKey: "userId" },
+        { onDelete: "CASCADE" }
+      );
     }
   }
   User.init(
     {
-      // uuid: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      // },
       email: {
         type: DataTypes.STRING,
         allowNull: false,

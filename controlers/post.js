@@ -40,3 +40,10 @@ exports.deletePost = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+exports.modifyPost = (req, res, next) => {
+  const postObject = req.body;
+  Post.update({ ...postObject }, { where: { id: req.params.id } })
+    .then(res.status(200).json({ message: "post modifié" }))
+    .catch((error) => res.status(400).json({ error }));
+};
