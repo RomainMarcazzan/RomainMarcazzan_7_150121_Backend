@@ -18,7 +18,7 @@ exports.modifyUser = (req, res, next) => {
 
 exports.getOneProfile = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
-    .then((user) => res.status(200).json({ user }))
+    .then((user) => res.status(200).json(user))
     .catch((error) => res.status(400).json({ error }));
 };
 
