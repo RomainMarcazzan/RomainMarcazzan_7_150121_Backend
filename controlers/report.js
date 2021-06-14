@@ -54,3 +54,10 @@ exports.removeProfile = (req, res, next) => {
     .then(res.status(200).json({ message: "compte supprimé" }))
     .catch(res.status(400).json({ error }));
 };
+
+exports.blockProfile = (req, res, next) => {
+  const userObject = req.body;
+  User.update({ ...userObject }, { where: { id: req.params.id } })
+    .then(res.status(200).json({ message: "profil bloqué" }))
+    .catch((error) => res.status(400).json({ error }));
+};

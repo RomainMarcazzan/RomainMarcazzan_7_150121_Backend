@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.signup = (req, res, next) => {
-  const { email, password, firstname, lastname, avatar, isAdmin } = req.body;
+  const { email, password, firstname, lastname, avatar, isAdmin, isActive } =
+    req.body;
   bcrypt
     .hash(password, 10)
     .then((hash) => {
@@ -15,6 +16,7 @@ exports.signup = (req, res, next) => {
         lastname,
         avatar,
         isAdmin,
+        isActive,
       });
       user
         .save()
@@ -32,7 +34,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  User.findOne({ where: { email: req.body.email } })
+  User.findOne({ where: { email: req.body.email, isActive: true } })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé" });
