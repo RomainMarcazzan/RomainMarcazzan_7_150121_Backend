@@ -22,7 +22,13 @@ exports.signup = (req, res, next) => {
         .save()
         .then(() =>
           res.status(201).json({
-            user,
+            user: {
+              userId: user.id,
+              userFirstname: user.firstname,
+              userLastname: user.lastname,
+              userAvatar: user.avatar,
+              userIsAdmin: user.isAdmin,
+            },
             token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
               expiresIn: "24h",
             }),
@@ -47,7 +53,13 @@ exports.login = (req, res, next) => {
             return;
           }
           res.status(200).json({
-            user,
+            user: {
+              userId: user.id,
+              userFirstname: user.firstname,
+              userLastname: user.lastname,
+              userAvatar: user.avatar,
+              userIsAdmin: user.isAdmin,
+            },
             token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
               expiresIn: "24h",
             }),

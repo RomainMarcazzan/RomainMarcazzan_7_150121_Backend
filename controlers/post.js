@@ -1,4 +1,4 @@
-const { Post } = require("../models");
+const { Post, User } = require("../models");
 const fs = require("fs");
 
 exports.createPost = (req, res, next) => {
@@ -17,13 +17,19 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll({ include: "User", order: [["createdAt", "DESC"]] })
+  Post.findAll({
+    include: { model: User, attributes: ["firstname", "lastname", "avatar"] },
+    order: [["createdAt", "DESC"]],
+  })
     .then((posts) => res.status(200).json({ posts }))
     .catch((error) => res.status(400).json({ error }));
 };
 
 exports.getOnePost = (req, res, next) => {
-  Post.findOne({ where: { id: req.params.id }, include: "User" })
+  Post.findOne({
+    where: { id: req.params.id },
+    include: { model: User, attributes: ["firstname", "lastname", "avatar"] },
+  })
     .then((post) => res.status(200).json({ post }))
     .catch((error) => res.status(400).json({ error }));
 };

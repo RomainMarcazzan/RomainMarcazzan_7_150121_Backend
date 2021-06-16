@@ -1,4 +1,4 @@
-const { Comment } = require("../models");
+const { Comment, User } = require("../models");
 
 exports.createComment = (req, res, next) => {
   const commentObject = req.body;
@@ -12,7 +12,7 @@ exports.createComment = (req, res, next) => {
 exports.getComments = (req, res, next) => {
   Comment.findAll({
     where: { postId: req.params.id },
-    include: "User",
+    include: { model: User, attributes: ["firstname", "lastname", "avatar"] },
     order: [["createdAt", "DESC"]],
   })
     .then((comments) => res.status(200).json({ comments }))
