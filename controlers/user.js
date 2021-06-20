@@ -23,11 +23,11 @@ exports.signup = (req, res, next) => {
         .then(() =>
           res.status(201).json({
             user: {
-              userId: user.id,
-              userFirstname: user.firstname,
-              userLastname: user.lastname,
-              userAvatar: user.avatar,
-              userIsAdmin: user.isAdmin,
+              id: user.id,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              avatar: user.avatar,
+              isAdmin: user.isAdmin,
             },
             token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
               expiresIn: "24h",
@@ -54,11 +54,11 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             user: {
-              userId: user.id,
-              userFirstname: user.firstname,
-              userLastname: user.lastname,
-              userAvatar: user.avatar,
-              userIsAdmin: user.isAdmin,
+              id: user.id,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              avatar: user.avatar,
+              isAdmin: user.isAdmin,
             },
             token: jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN, {
               expiresIn: "24h",
