@@ -2,27 +2,21 @@ const { User } = require("../models");
 const fs = require("fs");
 
 exports.modifyUser = (req, res, next) => {
-  const userObject = req.body;
   User.update(
     {
-      ...userObject,
       avatar: `${req.protocol}://${req.get("host")}/avatars/${
         req.file.filename
       }`,
     },
     { where: { id: req.params.id } }
   )
-    .then(() => res.status(200).json({ message: "avatar mis à jour" }))
+    .then(() => {
+      return User.findByPk(req.params.id, {
+        attributes: ["id", "firstname", "lastname", "isAdmin", "avatar"],
+      });
+    })
+    .then((user) => res.status(200).json(user))
     .catch((error) => res.status(500).json({ error }));
-};
-
-exports.getOneProfile = (req, res, next) => {
-  User.findOne({
-    where: { id: req.params.id },
-    attributes: ["avatar"],
-  })
-    .then((user) => res.status(200).json({ user }))
-    .catch((error) => res.status(400).json({ error }));
 };
 
 exports.removeProfile = (req, res, next) => {

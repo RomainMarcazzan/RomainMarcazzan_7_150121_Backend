@@ -21,7 +21,7 @@ exports.createLike = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.getOneLike = (req, res, next) => {
+exports.getLikesOfPost = (req, res, next) => {
   Like.findAll({
     where: { postId: req.params.id },
   })

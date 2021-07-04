@@ -12,7 +12,7 @@ exports.createPost = (req, res, next) => {
   });
   post
     .save()
-    .then(res.status(201).json({ message: "post enregistré" }))
+    .then((post) => res.status(201).json(post))
     .catch((error) => res.status(500).json(error));
 };
 
@@ -21,7 +21,7 @@ exports.getAllPosts = (req, res, next) => {
     include: { model: User, attributes: ["firstname", "lastname", "avatar"] },
     order: [["createdAt", "DESC"]],
   })
-    .then((posts) => res.status(200).json({ posts }))
+    .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(400).json({ error }));
 };
 

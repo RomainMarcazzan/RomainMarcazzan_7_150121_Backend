@@ -5,6 +5,5 @@ const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config-avatar");
 
 router.put("/:id", auth, multer, profileCtrl.modifyUser);
-router.get("/:id", auth, profileCtrl.getOneProfile);
 router.delete("/:id", auth, profileCtrl.removeProfile);
 module.exports = router;
