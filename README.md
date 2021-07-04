@@ -1,6 +1,6 @@
 # Groupomania
 
-This is the backend server for Project 6
+This is the backend server for Project 7
 
 # Prerequisites
 
