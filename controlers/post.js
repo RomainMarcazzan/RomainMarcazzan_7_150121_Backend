@@ -3,14 +3,14 @@ const fs = require("fs");
 
 exports.createPost = (req, res, next) => {
   const postObject = req.body;
-  console.log(postObject);
+  console.log("req", postObject);
   const post = new Post({
     ...postObject,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
   });
-  console.log(post);
+  console.log("post", post);
   post
     .save()
     .then((post) => res.status(201).json(post))
