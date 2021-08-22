@@ -6,9 +6,9 @@ exports.createPost = (req, res, next) => {
   console.log("req", postObject);
   const post = new Post({
     ...postObject,
-    imageUrl:
-      req.file.filename &&
-      `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    imageUrl: req.file.filename
+      ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      : null,
   });
   console.log("post", post);
   post
